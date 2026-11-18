@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burger & Grill Fast Food</title>
+    
+    <!-- Favicon (ícone na aba do navegador) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍔</text></svg>">
+    
+    <!-- Ícones FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Arquivo de Estilos -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Barra Superior de Inclusão e Acessibilidade -->
+    <div class="barra-acessibilidade">
+        <div class="grupo-acessibilidade">
+            <span><i class="fas fa-universal-access"></i> Acessibilidade:</span>
+            <button id="btn-tema" title="Alternar Modo Escuro/Claro">🌓 Contraste</button>
+            <button id="btn-aumentar-fonte" title="Aumentar Fonte">A+</button>
+            <button id="btn-diminuir-fonte" title="Diminuir Fonte">A-</button>
+            <button id="btn-ler-texto" title="Ouvir apresentação do site">🔊 Ouvir</button>
+        </div>
+        <div class="seletor-idioma">
+            <span class="idioma-ativo">🇧🇷 PT-BR</span>
+        </div>
+    </div>
+
+    <!-- Cabeçalho Principal -->
+    <header class="cabecalho">
+        <div class="logo">
+            <h1>🍔 Burger & Grill</h1>
+            <p>O sabor artesanal na velocidade da sua fome!</p>
+        </div>
+
+        <button id="btn-abrir-carrinho" class="btn-carrinho">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Carrinho</span> (<span id="contador-carrinho">0</span>)
+        </button>
+    </header>
+
+    <!-- Banner Promocional -->
+    <section class="banner-destaque">
+        <div class="banner-conteudo">
+            <span class="tag-oferta">🔥 DESTAQUE DA SEMANA</span>
+            <h2>Combo Duplo Bacon Supreme + Fritas</h2>
+            <p>Peça online com entrega expressa e aproveite nossas condições exclusivas de pagamento.</p>
+        </div>
+    </section>
+
+    <!-- Barra de Busca e Filtros de Categoria -->
+    <section class="secao-filtros">
+        <div class="caixa-busca">
+            <i class="fas fa-search"></i>
+            <input type="text" id="input-busca" placeholder="Pesquisar lanche pelo nome...">
+        </div>
+
+        <nav class="categorias">
+            <button class="btn-categoria ativo" data-categoria="todos">Todos (12)</button>
+            <button class="btn-categoria" data-categoria="burgers">Hambúrgueres</button>
+            <button class="btn-categoria" data-categoria="acompanhamentos">Acompanhamentos</button>
+            <button class="btn-categoria" data-categoria="sobremesas">Sobremesas</button>
+            <button class="btn-categoria" data-categoria="bebidas">Bebidas</button>
+        </nav>
+    </section>
+
+    <!-- Grid Principal (12 Cards da API) -->
+    <main class="container">
+        <div id="mensagem-carregando" class="carregando">
+            <i class="fas fa-spinner fa-spin"></i> Preparando o cardápio fresquinho da API...
+        </div>
+        <section id="grid-produtos" class="grid-produtos"></section>
+    </main>
+
+    <!-- Notificação Flutuante (Toast) -->
+    <div id="toast-aviso" class="toast">✅ Item adicionado ao carrinho!</div>
+
+    <!-- Modal do Carrinho de Compras e Forma de Pagamento -->
+    <div id="modal-carrinho" class="modal">
+        <div class="modal-conteudo">
+            <div class="modal-cabecalho">
+                <h2>🛒 Seu Pedido</h2>
+                <button id="btn-fechar-carrinho" class="btn-fechar">&times;</button>
+            </div>
+
+            <!-- Lista de itens dinâmicos com controle de quantidade -->
+            <div id="itens-carrinho" class="itens-carrinho"></div>
+
+            <!-- Resumo Financeiro e Pagamento -->
+            <div class="resumo-pedido">
+                <div class="linha-total">
+                    <span>Subtotal:</span>
+                    <span>R$ <span id="valor-subtotal">0,00</span></span>
+                </div>
+                <div class="linha-total">
+                    <span>Taxa de Entrega:</span>
+                    <span class="entrega-gratis">GRÁTIS</span>
+                </div>
+                <div class="linha-total total-geral">
+                    <strong>Total:</strong>
+                    <strong>R$ <span id="valor-total">0,00</span></strong>
+                </div>
+
+                <label for="forma-pagamento"><strong>Forma de Pagamento:</strong></label>
+                <select id="forma-pagamento">
+                    <option value="PIX">PIX (Aprovação Imediata)</option>
+                    <option value="Cartão de Crédito">Cartão de Crédito</option>
+                    <option value="Cartão de Débito">Cartão de Débito</option>
+                    <option value="Vale Refeição">Vale Refeição (VR / Sodexo)</option>
+                    <option value="Dinheiro">Dinheiro (na entrega)</option>
+                </select>
+
+                <!-- Área dinâmica de pagamento -->
+                <div id="detalhe-pagamento" class="detalhe-pagamento">
+                    <p>🔑 Chave PIX (CNPJ): <strong>12.345.678/0001-99</strong></p>
+                </div>
+
+                <button id="btn-finalizar" class="btn-finalizar">Finalizar Pedido Agora</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botão Flutuante do WhatsApp -->
+    <a href="https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20tirar%20dúvidas%20sobre%20o%20cardápio." 
+       target="_blank" 
+       class="whatsapp-flutuante" 
+       title="Atendimento via WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Rodapé com as 3 Mídias Sociais -->
+    <footer class="rodape">
+        <div class="info-empresa">
+            <h3>Burger & Grill Fast Food</h3>
+            <p>Atendimento diário das 11h00 às 23h30</p>
+        </div>
+
+        <div class="redes-sociais">
+            <a href="https://instagram.com" target="_blank" title="Instagram"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="https://facebook.com" target="_blank" title="Facebook"><i class="fab fa-facebook"></i> Facebook</a>
+            <a href="https://tiktok.com" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i> TikTok</a>
+        </div>
+
+        <p class="copyright">&copy; 2026 Burger & Grill - Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Widget Oficial do VLibras (Inclusão em Libras) -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+    <!-- Arquivo de Script -->
+    <script src="script.js"></script>
+</body>
+</html>

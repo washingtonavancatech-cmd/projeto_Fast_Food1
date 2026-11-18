@@ -1,0 +1,506 @@
+/* Paleta de Cores Gastronômicas (Estimulam o apetite) */
+:root {
+    --cor-primaria: #d62828;      /* Vermelho Tomate / Ketchup */
+    --cor-secundaria: #f77f00;    /* Laranja Cheddar */
+    --cor-destaque: #fcbf49;      /* Amarelo Mostarda */
+    --cor-fundo: #fff8f0;         /* Creme Suave */
+    --cor-card: #ffffff;          /* Branco Puro */
+    --cor-texto: #2b2d42;         /* Cinza Chumbo Escuro */
+    --cor-borda: #eae2b7;         /* Bege Clara */
+    --tamanho-fonte: 16px;
+}
+
+/* Tema Escuro / Alto Contraste */
+body.tema-escuro {
+    --cor-fundo: #141414;
+    --cor-card: #1f1f1f;
+    --cor-texto: #f1f1f1;
+    --cor-borda: #333333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+    font-size: var(--tamanho-fonte);
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Barra Superior de Acessibilidade */
+.barra-acessibilidade {
+    background-color: #1a1b26;
+    color: #fff;
+    padding: 8px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 0.85rem;
+}
+
+.grupo-acessibilidade {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.barra-acessibilidade button {
+    background-color: var(--cor-destaque);
+    color: #000;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: opacity 0.2s;
+}
+
+.barra-acessibilidade button:hover {
+    opacity: 0.85;
+}
+
+/* Cabeçalho */
+.cabecalho {
+    background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+    color: white;
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+}
+
+.logo p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.btn-carrinho {
+    background-color: var(--cor-destaque);
+    color: #2b2d42;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+}
+
+.btn-carrinho:hover {
+    transform: scale(1.05);
+}
+
+/* Banner Destaque */
+.banner-destaque {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                url('https://www.themealdb.com/images/media/meals/urzj1d1587670726.jpg') center/cover;
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.tag-oferta {
+    background-color: var(--cor-primaria);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.banner-destaque h2 {
+    font-size: 2rem;
+    margin: 12px 0 8px;
+    color: var(--cor-destaque);
+}
+
+/* Seção de Filtros e Busca */
+.secao-filtros {
+    max-width: 1200px;
+    margin: 25px auto 0;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.caixa-busca {
+    position: relative;
+    max-width: 450px;
+}
+
+.caixa-busca i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777;
+}
+
+.caixa-busca input {
+    width: 100%;
+    padding: 12px 15px 12px 42px;
+    border-radius: 25px;
+    border: 2px solid var(--cor-borda);
+    background-color: var(--cor-card);
+    color: var(--cor-texto);
+    font-size: 1rem;
+}
+
+.categorias {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.btn-categoria {
+    background-color: var(--cor-card);
+    border: 2px solid var(--cor-primaria);
+    color: var(--cor-primaria);
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-categoria:hover, .btn-categoria.ativo {
+    background-color: var(--cor-primaria);
+    color: white;
+}
+
+/* Grid de Cards (12 Cards) com Animação */
+.container {
+    max-width: 1200px;
+    margin: 25px auto 50px;
+    padding: 0 20px;
+}
+
+.carregando {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 40px;
+}
+
+.grid-produtos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background-color: var(--cor-card);
+    border: 1px solid var(--cor-borda);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    animation: fadeInCard 0.6s ease forwards;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(214,40,40,0.22);
+}
+
+@keyframes fadeInCard {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card-img-container {
+    position: relative;
+    overflow: hidden;
+    height: 185px;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.card:hover img {
+    transform: scale(1.08);
+}
+
+.badge-kcal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+}
+
+.card-info {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tag-categoria-card {
+    background-color: var(--cor-destaque);
+    color: #000;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 5px;
+    align-self: flex-start;
+    text-transform: uppercase;
+}
+
+.card-preco {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--cor-primaria);
+}
+
+.btn-adicionar {
+    background-color: var(--cor-secundaria);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-adicionar:hover {
+    background-color: var(--cor-primaria);
+}
+
+/* Notificação Toast */
+.toast {
+    visibility: hidden;
+    background-color: #2a9d8f;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 30px;
+    position: fixed;
+    bottom: 95px;
+    left: 25px;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    z-index: 1001;
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.toast.mostrar {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Modal do Carrinho */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.65);
+    justify-content: center;
+    align-items: center;
+    z-index: 1002;
+}
+
+.modal-conteudo {
+    background-color: var(--cor-card);
+    color: var(--cor-texto);
+    width: 92%;
+    max-width: 500px;
+    border-radius: 15px;
+    padding: 24px;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.modal-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--cor-borda);
+    padding-bottom: 12px;
+}
+
+.btn-fechar {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--cor-texto);
+}
+
+.itens-carrinho {
+    margin: 15px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.item-carrinho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--cor-borda);
+    padding-bottom: 10px;
+}
+
+.controles-qtd {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-qtd {
+    background-color: var(--cor-destaque);
+    color: #000;
+    border: none;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.resumo-pedido {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-top: 2px solid var(--cor-borda);
+    padding-top: 15px;
+}
+
+.linha-total {
+    display: flex;
+    justify-content: space-between;
+}
+
+.entrega-gratis {
+    color: #2a9d8f;
+    font-weight: bold;
+}
+
+.total-geral {
+    font-size: 1.2rem;
+    color: var(--cor-primaria);
+}
+
+.resumo-pedido select, .detalhe-pagamento input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--cor-borda);
+    font-size: 1rem;
+    width: 100%;
+}
+
+.detalhe-pagamento {
+    background-color: rgba(252,191,73,0.18);
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.btn-finalizar {
+    background-color: #2a9d8f;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-finalizar:hover {
+    background-color: #21867a;
+}
+
+/* Botão Flutuante WhatsApp */
+.whatsapp-flutuante {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    background-color: #25d366;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 999;
+    transition: transform 0.3s;
+    text-decoration: none;
+}
+
+.whatsapp-flutuante:hover {
+    transform: scale(1.12);
+}
+
+/* Rodapé com as 3 Redes Sociais */
+.rodape {
+    background-color: #1a1b26;
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+    margin-top: 50px;
+}
+
+.redes-sociais {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin: 15px 0;
+    flex-wrap: wrap;
+}
+
+.redes-sociais a {
+    color: var(--cor-destaque);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.redes-sociais a:hover {
+    color: white;
+}
